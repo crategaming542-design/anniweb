@@ -12,6 +12,7 @@
     background-size: cover;
     color: #4a0000;
     text-align: center;
+    transition: filter 0.4s ease;
   }
 
   /* Thanh menu */
@@ -24,20 +25,33 @@
     font-weight: 600;
     backdrop-filter: blur(6px);
     border-bottom: 1px solid #ffb3c1;
+    transition: all 0.3s ease;
   }
 
   .navbar a {
     text-decoration: none;
     color: #d63384;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    display: inline-block;
   }
+
   .navbar a:hover,
   .navbar a.active {
     color: #b3005e;
     text-shadow: 0 0 10px #ffb3c1;
   }
 
-  /* Phần nội dung ẩn/hiện */
+  /* Hiệu ứng hover gần menu */
+  .navbar a:hover {
+    transform: scale(1.2);
+  }
+
+  .navbar:hover ~ body,
+  .navbar:hover ~ * {
+    filter: blur(10%);
+  }
+
+  /* Phần nội dung */
   section {
     display: none;
     padding: 30px;
@@ -46,6 +60,7 @@
   section.active {
     display: block;
   }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -62,6 +77,15 @@
     padding: 25px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    max-height: 100px;
+    position: relative;
+  }
+
+  .letter-box.open {
+    max-height: 500px;
   }
 
   .letter-box h2 {
@@ -72,12 +96,18 @@
   }
 
   .scroll-letter {
-    max-height: 300px;
-    overflow-y: auto;
+    max-height: 0;
+    overflow-y: hidden;
     text-align: left;
     padding-right: 10px;
     line-height: 1.8;
     color: #444;
+    transition: max-height 0.8s ease-in-out;
+  }
+
+  .letter-box.open .scroll-letter {
+    max-height: 300px;
+    overflow-y: auto;
   }
 
   .scroll-letter::-webkit-scrollbar {
@@ -110,7 +140,7 @@
 
   .song:hover {
     background: #ffe5ec;
-    transform: scale(1.01);
+    transform: scale(1.05);
   }
 
   .song-info {
@@ -156,7 +186,7 @@
 
   <!-- LOVE LETTER -->
   <section id="letter" class="active">
-    <div class="letter-box">
+    <div class="letter-box" id="letterBox">
       <h2>A Letter For You 💌</h2>
       <div class="scroll-letter">
         <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
@@ -220,10 +250,16 @@
       document.title = `${title} – ${artist}`;
     }
 
-    // 🔊 Khi vào trang tự động phát bài “Nhớ Mãi Chuyến Đi Này”
+    // Tự động phát bài khi vào trang
     window.addEventListener("load", () => {
       const songPath = "images/Nhớ Mãi Chuyến Đi Này (feat. Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi & Cầm).mp3";
       playSong(songPath, "Nhớ Mãi Chuyến Đi Này", "Bùi Công Nam, Wren Evans...");
+    });
+
+    // Thư: click mở/đóng
+    const letterBox = document.getElementById("letterBox");
+    letterBox.addEventListener("click", () => {
+      letterBox.classList.toggle("open");
     });
   </script>
 
