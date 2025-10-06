@@ -24,13 +24,8 @@
       transition: opacity 1s ease-in-out;
     }
 
-    body.fade-in {
-      opacity: 1;
-    }
-
-    body.fade-out {
-      opacity: 0;
-    }
+    body.fade-in { opacity: 1; }
+    body.fade-out { opacity: 0; }
 
     @keyframes gradientMove {
       0% { background-position: 0% 50%; }
@@ -131,14 +126,8 @@
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
@@ -146,12 +135,11 @@
   <h1>Happy Anniversary 💖</h1>
 
   <div class="container">
-    <!-- Khung ảnh bên trái -->
     <div class="photo-frame">
-      <img src="images/DSC02880 (2).jpg" alt="Our photo">
+      <!-- Ảnh nằm cùng thư mục -->
+      <img src="DSC02880_2.jpg" alt="Our photo">
     </div>
 
-    <!-- Bàn phím mật mã bên phải -->
     <div class="keypad">
       <div class="screen" id="screen"></div>
       <button class="btn" onclick="press('1')">1</button>
@@ -171,7 +159,7 @@
 
   <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
 
-  <!-- Nhạc nền tự động phát -->
+  <!-- Nhạc nền -->
   <audio id="bgMusic" autoplay loop>
     <source src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" type="audio/mpeg">
   </audio>
@@ -179,18 +167,13 @@
   <script>
     let code = "";
     const screen = document.getElementById("screen");
+    const bgMusic = document.getElementById("bgMusic");
 
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
       screen.textContent = "";
+      bgMusic.volume = 0.8;
       createHearts();
-
-      // Bắt đầu phát nhạc
-      const music = document.getElementById("bgMusic");
-      music.volume = 1;
-      music.play().catch(() => {
-        console.log("User interaction required for autoplay.");
-      });
     });
 
     function press(num) {
@@ -213,21 +196,18 @@
     }
 
     function submitCode() {
-      const bgMusic = document.getElementById("bgMusic");
-
       if (code === "01112021") {
-        // Hiệu ứng fade-out nhạc
+        // Fade out nhạc mượt
         let fadeAudio = setInterval(() => {
           if (bgMusic.volume > 0.05) {
             bgMusic.volume -= 0.05;
           } else {
-            bgMusic.volume = 0;
             clearInterval(fadeAudio);
             bgMusic.pause();
             document.body.classList.add("fade-out");
             setTimeout(() => {
-              window.location.href = "page3.html";
-            }, 500);
+              window.location.href = "locked.html";
+            }, 800);
           }
         }, 150);
       } else {
@@ -236,7 +216,6 @@
       }
     }
 
-    // Tạo hiệu ứng trái tim rơi
     function createHearts() {
       const heartCount = 20;
       for (let i = 0; i < heartCount; i++) {
