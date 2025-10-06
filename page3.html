@@ -1,286 +1,220 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Anniversary 💖</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anniversary Page 💞</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #ffccd5, #ffd6e0, #ffe6f0);
+    color: #4a0000;
+    text-align: center;
+  }
 
-  <!-- Font chữ viết tay xinh -->
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  /* Thanh menu */
+  .navbar {
+    background: rgba(255, 160, 176, 0.4);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 15px;
+    font-weight: 600;
+    backdrop-filter: blur(5px);
+  }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #ffb6c1, #ffe6eb);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+  .navbar a {
+    text-decoration: none;
+    color: #d63384;
+    transition: 0.3s;
+  }
+  .navbar a:hover,
+  .navbar a.active {
+    color: #b3005e;
+    text-shadow: 0 0 10px #ffb3c1;
+  }
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #ff9aa2;
-      padding: 10px;
-      gap: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+  /* Phần nội dung ẩn/hiện */
+  section {
+    display: none;
+    padding: 30px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
 
-    header button {
-      background-color: #fff;
-      border: none;
-      border-radius: 30px;
-      padding: 8px 16px;
-      font-size: 16px;
-      color: #ff5c8d;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+  section.active {
+    display: block;
+  }
 
-    header button.active {
-      background-color: #ff5c8d;
-      color: #fff;
-      transform: scale(1.05);
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-    header button:hover {
-      transform: scale(1.1);
-    }
+  /* LOVE LETTER */
+  .letter-box {
+    background: #fff;
+    border: 3px dashed #ff8fa3;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
 
-    section {
-      display: none;
-      flex: 1;
-      padding: 20px;
-      text-align: center;
-      animation: fadeIn 0.4s ease;
-    }
+  .letter-box h2 {
+    color: #ff5c8d;
+    margin-bottom: 15px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+  }
 
-    section.active {
-      display: block;
-    }
+  .scroll-letter {
+    max-height: 300px;
+    overflow-y: auto;
+    text-align: left;
+    padding-right: 10px;
+    line-height: 1.8;
+    color: #444;
+  }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+  .scroll-letter::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scroll-letter::-webkit-scrollbar-thumb {
+    background-color: #ffb3c1;
+    border-radius: 10px;
+  }
 
-    /* --- LOVE LETTER --- */
-    .letter-box {
-      background: #fff;
-      border: 3px dashed #ff8fa3;
-      border-radius: 20px;
-      width: 80%;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 25px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+  /* MUSIC */
+  .song-list {
+    width: 80%;
+    max-width: 700px;
+    margin: 30px auto;
+  }
 
-    .letter-box h2 {
-      color: #ff5c8d;
-      margin-bottom: 15px;
-      font-family: 'Great Vibes', cursive;
-      font-size: 32px;
-    }
+  .song {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-    .scroll-letter {
-      max-height: 300px;
-      overflow-y: auto;
-      text-align: left;
-      padding-right: 10px;
-      line-height: 1.8;
-      color: #444;
-    }
+  .song:hover {
+    background: #ffe5ec;
+    transform: scale(1.01);
+  }
 
-    .scroll-letter::-webkit-scrollbar {
-      width: 6px;
-    }
-    .scroll-letter::-webkit-scrollbar-thumb {
-      background-color: #ffb3c1;
-      border-radius: 10px;
-    }
-    .scroll-letter::-webkit-scrollbar-thumb:hover {
-      background-color: #ff758f;
-    }
+  .song-info {
+    text-align: left;
+  }
 
-    /* --- MUSIC PLAYER --- */
-    .music-player {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #fff0f3;
-      border-top: 2px solid #ffc6d0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
-    }
+  .song-title {
+    font-weight: bold;
+    color: #c1124a;
+  }
 
-    .music-player button {
-      border: none;
-      background: #ff5c8d;
-      color: white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      font-size: 18px;
-    }
+  .song-artist {
+    font-size: 14px;
+    color: #6a1a44;
+  }
 
-    .music-player span {
-      flex: 1;
-      text-align: center;
-      color: #ff5c8d;
-      font-weight: 600;
-    }
+  /* Trình phát nhạc */
+  #audioPlayer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #ffb3c1;
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  }
 
-    /* --- MUSIC LIST --- */
-    .music-list button {
-      display: block;
-      margin: 10px auto;
-      background: #fff;
-      border: 2px solid #ff5c8d;
-      color: #ff5c8d;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .music-list button:hover {
-      background: #ff5c8d;
-      color: #fff;
-    }
-
-    /* --- GALLERY --- */
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    .gallery img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-  </style>
+  /* GALLERY */
+  .gallery {
+    padding: 20px;
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <button id="btn-letter" class="active"><i>💌</i> Love Letter</button>
-    <button id="btn-music"><i>🎵</i> Music</button>
-    <button id="btn-gallery"><i>📸</i> Gallery</button>
-  </header>
+  <div class="navbar">
+    <a href="#" class="active" onclick="showTab('letter', this)">Love Letter</a>
+    <a href="#" onclick="showTab('music', this)">Music</a>
+    <a href="#" onclick="showTab('gallery', this)">Gallery</a>
+  </div>
 
   <!-- LOVE LETTER -->
   <section id="letter" class="active">
     <div class="letter-box">
-      <h2>A Letter For You 💖</h2>
+      <h2>A Letter For You 💌</h2>
       <div class="scroll-letter">
         <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
-        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
-        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
-        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
+        <p>Viết thêm nội dung của bạn tại đây...</p>
       </div>
     </div>
   </section>
 
   <!-- MUSIC -->
   <section id="music">
-    <h2>Music 🎶</h2>
-    <div class="music-list">
-      <button onclick="playSong('music/music1.mp3', 'My Love Song')">My Love Song</button>
-      <button onclick="playSong('music/music2.mp3', 'Our Memory')">Our Memory</button>
-      <button onclick="playSong('music/music3.mp3', 'Forever Us')">Forever Us</button>
+    <h2>Songs that remind me of you 🎵</h2>
+    <div class="song-list">
+      <div class="song" onclick="playSong('images/BOL4 (볼빨간사춘기) - Some (썸 탈꺼야) Easy Lyrics.mp3', 'Some (썸 탈꺼야)', 'BOL4')">
+        <div class="song-info">
+          <div class="song-title">Some (썸 탈꺼야)</div>
+          <div class="song-artist">BOL4</div>
+        </div>
+        🎶
+      </div>
+      <div class="song" onclick="playSong('images/Only You.mp3', 'Only You', 'Unknown Artist')">
+        <div class="song-info">
+          <div class="song-title">Only You</div>
+          <div class="song-artist">Unknown Artist</div>
+        </div>
+        🎶
+      </div>
+      <div class="song" onclick="playSong('images/Nhớ Mãi Chuyến Đi Này (feat. Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi & Cầm).mp3', 'Nhớ Mãi Chuyến Đi Này', 'Bùi Công Nam, Wren Evans...')">
+        <div class="song-info">
+          <div class="song-title">Nhớ Mãi Chuyến Đi Này</div>
+          <div class="song-artist">Bùi Công Nam, Wren Evans...</div>
+        </div>
+        🎶
+      </div>
     </div>
   </section>
 
   <!-- GALLERY -->
   <section id="gallery">
-    <h2>Gallery 📸</h2>
-    <div class="gallery">
-      <img src="img1.jpg" alt="">
-      <img src="img2.jpg" alt="">
-      <img src="img3.jpg" alt="">
-    </div>
+    <h2>Your Memories 📸</h2>
+    <p>Thêm ảnh sau nhé!</p>
   </section>
 
-  <!-- MUSIC PLAYER -->
-  <div class="music-player">
-    <button id="togglePlay">⏸️</button>
-    <span id="currentSong">No song playing</span>
-    <audio id="audioPlayer"></audio>
-  </div>
+  <audio id="audioPlayer" controls></audio>
 
   <script>
-    const sections = {
-      letter: document.getElementById('letter'),
-      music: document.getElementById('music'),
-      gallery: document.getElementById('gallery')
-    };
+    const player = document.getElementById("audioPlayer");
 
-    const buttons = {
-      letter: document.getElementById('btn-letter'),
-      music: document.getElementById('btn-music'),
-      gallery: document.getElementById('btn-gallery')
-    };
+    function showTab(tabId, el) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
 
-    // --- Chuyển giữa các tab ---
-    Object.keys(buttons).forEach(key => {
-      buttons[key].addEventListener('click', () => {
-        Object.keys(sections).forEach(k => {
-          sections[k].classList.remove('active');
-          buttons[k].classList.remove('active');
-        });
-        sections[key].classList.add('active');
-        buttons[key].classList.add('active');
-      });
-    });
-
-    // --- Trình phát nhạc ---
-    const audio = document.getElementById('audioPlayer');
-    const playBtn = document.getElementById('togglePlay');
-    const currentSong = document.getElementById('currentSong');
-    let isPlaying = false;
-
-    function playSong(src, name) {
-      audio.src = src;
-      audio.play();
-      isPlaying = true;
-      currentSong.textContent = name;
-      playBtn.textContent = '⏸️';
+      document.querySelectorAll(".navbar a").forEach(a => a.classList.remove("active"));
+      el.classList.add("active");
     }
 
-    playBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        audio.pause();
-        playBtn.textContent = '▶️';
-      } else {
-        audio.play();
-        playBtn.textContent = '⏸️';
-      }
-      isPlaying = !isPlaying;
-    });
+    function playSong(src, title, artist) {
+      player.src = src;
+      player.play();
+      document.title = `${title} – ${artist}`;
+    }
   </script>
 
 </body>
