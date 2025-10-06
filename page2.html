@@ -148,7 +148,7 @@
   <div class="container">
     <!-- Khung ảnh bên trái -->
     <div class="photo-frame">
-      <img src="DSC02880 (2).jpg" alt="Our photo">
+      <img src="images/DSC02880 (2).jpg" alt="Our photo">
     </div>
 
     <!-- Bàn phím mật mã bên phải -->
@@ -171,6 +171,11 @@
 
   <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
 
+  <!-- Nhạc nền tự động phát -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
     let code = "";
     const screen = document.getElementById("screen");
@@ -179,6 +184,13 @@
       document.body.classList.add("fade-in");
       screen.textContent = "";
       createHearts();
+
+      // Bắt đầu phát nhạc
+      const music = document.getElementById("bgMusic");
+      music.volume = 1;
+      music.play().catch(() => {
+        console.log("User interaction required for autoplay.");
+      });
     });
 
     function press(num) {
@@ -201,11 +213,23 @@
     }
 
     function submitCode() {
+      const bgMusic = document.getElementById("bgMusic");
+
       if (code === "01112021") {
-        document.body.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = "page3.html";
-        }, 1000);
+        // Hiệu ứng fade-out nhạc
+        let fadeAudio = setInterval(() => {
+          if (bgMusic.volume > 0.05) {
+            bgMusic.volume -= 0.05;
+          } else {
+            bgMusic.volume = 0;
+            clearInterval(fadeAudio);
+            bgMusic.pause();
+            document.body.classList.add("fade-out");
+            setTimeout(() => {
+              window.location.href = "page3.html";
+            }, 500);
+          }
+        }, 150);
       } else {
         alert("Sai rồi, thử lại nhé 💕");
         clearScreen();
