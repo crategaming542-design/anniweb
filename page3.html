@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Anniversary 💖</title>
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anniversary - Page 3</title>
+  <!-- Font chữ viết tay xinh -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(to bottom, #ff9ca0, #ffc6d0);
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #ffb6c1, #ffe6eb);
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* --- Thanh menu --- */
+    /* Header */
     header {
       display: flex;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
-      padding: 15px 0;
+      align-items: center;
+      background-color: #ff9aa2;
+      padding: 10px;
+      gap: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
     header button {
-      background: transparent;
+      background-color: #fff;
       border: none;
-      font-size: 18px;
-      font-weight: bold;
-      color: #b3003b;
-      margin: 0 20px;
+      border-radius: 30px;
+      padding: 8px 16px;
+      font-size: 16px;
+      color: #ff5c8d;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       cursor: pointer;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     header button.active {
+      background-color: #ff5c8d;
       color: #fff;
-      text-shadow: 0 0 5px #ff3366;
+      transform: scale(1.05);
     }
 
     header button:hover {
-      color: #ff3366;
+      transform: scale(1.1);
     }
 
-    /* --- Nội dung từng phần --- */
     section {
       display: none;
       flex: 1;
-      padding: 30px;
+      padding: 20px;
       text-align: center;
-      animation: fadeIn 0.5s ease;
+      animation: fadeIn 0.4s ease;
     }
 
     section.active {
@@ -61,47 +71,90 @@
     }
 
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* --- Trình phát nhạc --- */
+    /* --- LOVE LETTER --- */
+    .letter-box {
+      background: #fff;
+      border: 3px dashed #ff8fa3;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .letter-box h2 {
+      color: #ff5c8d;
+      margin-bottom: 15px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+    }
+
+    .scroll-letter {
+      max-height: 300px;
+      overflow-y: auto;
+      text-align: left;
+      padding-right: 10px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .scroll-letter::-webkit-scrollbar {
+      width: 6px;
+    }
+    .scroll-letter::-webkit-scrollbar-thumb {
+      background-color: #ffb3c1;
+      border-radius: 10px;
+    }
+    .scroll-letter::-webkit-scrollbar-thumb:hover {
+      background-color: #ff758f;
+    }
+
+    /* --- MUSIC PLAYER --- */
     .music-player {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
-      background: rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(8px);
+      background: #fff0f3;
+      border-top: 2px solid #ffc6d0;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 -3px 8px rgba(0,0,0,0.1);
     }
 
     .music-player button {
       border: none;
-      background: #ff3366;
+      background: #ff5c8d;
       color: white;
       border-radius: 50%;
       width: 40px;
       height: 40px;
       cursor: pointer;
+      font-size: 18px;
     }
 
     .music-player span {
       flex: 1;
       text-align: center;
-      color: #b3003b;
+      color: #ff5c8d;
       font-weight: 600;
     }
 
+    /* --- MUSIC LIST --- */
     .music-list button {
       display: block;
       margin: 10px auto;
       background: #fff;
-      border: 2px solid #ff3366;
+      border: 2px solid #ff5c8d;
+      color: #ff5c8d;
       padding: 10px 20px;
       border-radius: 20px;
       cursor: pointer;
@@ -109,38 +162,70 @@
     }
 
     .music-list button:hover {
-      background: #ff3366;
-      color: white;
+      background: #ff5c8d;
+      color: #fff;
+    }
+
+    /* --- GALLERY --- */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <button id="btn-letter" class="active">Love Letter</button>
-    <button id="btn-music">Music</button>
-    <button id="btn-gallery">Gallery</button>
+    <button id="btn-letter" class="active"><i>💌</i> Love Letter</button>
+    <button id="btn-music"><i>🎵</i> Music</button>
+    <button id="btn-gallery"><i>📸</i> Gallery</button>
   </header>
 
+  <!-- LOVE LETTER -->
   <section id="letter" class="active">
-    <h2>Love Letter 💌</h2>
-    <p>Viết lời nhắn của bạn ở đây...</p>
-  </section>
-
-  <section id="music">
-    <h2>Music 🎶</h2>
-    <div class="music-list">
-      <button onclick="playSong('music1.mp3', 'My Love Song')">My Love Song</button>
-      <button onclick="playSong('music2.mp3', 'Our Memory')">Our Memory</button>
-      <button onclick="playSong('music3.mp3', 'Forever Us')">Forever Us</button>
+    <div class="letter-box">
+      <h2>A Letter For You 💖</h2>
+      <div class="scroll-letter">
+        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
+        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
+        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
+        <p>NỘI DUNGG CỦA TÔI Ở ĐÂY</p>
+      </div>
     </div>
   </section>
 
-  <section id="gallery">
-    <h2>Gallery 📸</h2>
-    <p>Thêm hình ảnh kỷ niệm của bạn ở đây...</p>
+  <!-- MUSIC -->
+  <section id="music">
+    <h2>Music 🎶</h2>
+    <div class="music-list">
+      <button onclick="playSong('music/music1.mp3', 'My Love Song')">My Love Song</button>
+      <button onclick="playSong('music/music2.mp3', 'Our Memory')">Our Memory</button>
+      <button onclick="playSong('music/music3.mp3', 'Forever Us')">Forever Us</button>
+    </div>
   </section>
 
+  <!-- GALLERY -->
+  <section id="gallery">
+    <h2>Gallery 📸</h2>
+    <div class="gallery">
+      <img src="img1.jpg" alt="">
+      <img src="img2.jpg" alt="">
+      <img src="img3.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- MUSIC PLAYER -->
   <div class="music-player">
     <button id="togglePlay">⏸️</button>
     <span id="currentSong">No song playing</span>
@@ -160,7 +245,7 @@
       gallery: document.getElementById('btn-gallery')
     };
 
-    // --- Chuyển tab ---
+    // --- Chuyển giữa các tab ---
     Object.keys(buttons).forEach(key => {
       buttons[key].addEventListener('click', () => {
         Object.keys(sections).forEach(k => {
@@ -197,5 +282,6 @@
       isPlaying = !isPlaying;
     });
   </script>
+
 </body>
 </html>
