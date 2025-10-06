@@ -14,9 +14,9 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      background: radial-gradient(circle at top left, #ff9ebb, #ff477e, #b30047);
+      background: linear-gradient(to bottom, #ff9aa2, #ffb6c1, #ffe6eb);
       background-size: 200% 200%;
-      animation: softGradient 15s ease-in-out infinite;
+      animation: gradientMove 10s ease infinite;
       font-family: 'Poppins', sans-serif;
       color: white;
       overflow: hidden;
@@ -27,18 +27,19 @@
     body.fade-in { opacity: 1; }
     body.fade-out { opacity: 0; }
 
-    @keyframes softGradient {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+    @keyframes gradientMove {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
     }
 
     h1 {
       text-align: center;
       margin-top: 30px;
       font-family: 'Great Vibes', cursive;
-      color: #fffafc;
-      font-size: 3rem;
-      text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 25px rgba(255,182,193,0.8);
+      color: #fff0f5;
+      font-size: 3.2rem;
+      text-shadow: 0 0 15px rgba(255, 0, 120, 0.5), 0 0 30px rgba(255, 150, 180, 0.5);
     }
 
     .container {
@@ -47,23 +48,21 @@
       align-items: center;
       justify-content: space-evenly;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     .photo-frame {
       width: 300px;
       height: 400px;
       background: white;
-      border-radius: 20px;
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      transform: scale(1);
-      transition: transform 0.8s ease-in-out;
     }
-
-    .photo-frame:hover { transform: scale(1.03); }
 
     .photo-frame img {
       width: 100%;
@@ -91,13 +90,12 @@
       font-weight: bold;
       letter-spacing: 2px;
       overflow: hidden;
-      box-shadow: inset 0 0 10px rgba(255,0,102,0.2);
     }
 
     .btn {
       width: 70px;
       height: 70px;
-      background: linear-gradient(145deg, #ff7aa8, #ff4d88);
+      background: #ff7aa8;
       border-radius: 50%;
       border: none;
       color: white;
@@ -109,7 +107,7 @@
     }
 
     .btn:hover {
-      background: linear-gradient(145deg, #ff99bb, #ff6699);
+      background: #ff99bb;
       transform: scale(1.05);
     }
 
@@ -120,17 +118,22 @@
       margin-bottom: 20px;
     }
 
-    /* Tim tĩnh bay nhẹ */
-    .floating-heart {
+    /* Tim bay mượt, đa hướng */
+    .heart {
       position: absolute;
-      font-size: 22px;
-      opacity: 0.8;
-      animation: floatHeart 8s ease-in-out infinite;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      animation: floatHeart linear infinite;
+      opacity: 0.9;
+      z-index: 1;
     }
 
     @keyframes floatHeart {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
-      50% { transform: translateY(-15px) scale(1.1); opacity: 1; }
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+      25% { transform: translate(40px, -25px) rotate(15deg); }
+      50% { transform: translate(-35px, 30px) rotate(-10deg); }
+      75% { transform: translate(25px, -30px) rotate(8deg); }
+      100% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
     }
   </style>
 </head>
@@ -138,11 +141,13 @@
   <h1>Happy Anniversary 💖</h1>
 
   <div class="container">
+    <!-- Ảnh kỷ niệm -->
     <div class="photo-frame">
-      <img id="hero" src="./DSC02880%20(1).jpg" alt="Ảnh kỷ niệm"
-        onerror="this.src='https://via.placeholder.com/300x400/fff0f5/ff7aa8?text=Ảnh+không+tìm+thấy'">
+      <img src="./DSC02880 (1).jpg" alt="Ảnh kỷ niệm"
+           onerror="this.src='https://via.placeholder.com/300x400/fff0f5/ff7aa8?text=Ảnh+không+tìm+thấy'">
     </div>
 
+    <!-- Bàn phím mật mã -->
     <div class="keypad">
       <div class="screen" id="screen"></div>
       <button class="btn" onclick="press('1')">1</button>
@@ -162,24 +167,24 @@
 
   <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
 
-  <audio id="bg-music" src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" preload="auto"></audio>
+  <audio id="bgMusic" loop>
+    <source src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     let code = "";
     const screen = document.getElementById("screen");
-    const music = document.getElementById("bg-music");
+    const audio = document.getElementById("bgMusic");
 
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
       screen.textContent = "";
-      spawnHearts();
-
-      const playMusicOnce = () => {
-        music.volume = 0.7;
-        music.play().catch(() => console.log("Autoplay bị chặn, cần click!"));
-        document.removeEventListener("click", playMusicOnce);
-      };
-      document.addEventListener("click", playMusicOnce);
+      createHearts();
+      // Phát nhạc sau 0.5s để mượt
+      setTimeout(() => {
+        audio.volume = 0.8;
+        audio.play().catch(() => {});
+      }, 500);
     });
 
     function press(num) {
@@ -189,9 +194,12 @@
       }
     }
 
+    // ❣️ Xóa từng ký tự thôi, không xóa hết
     function clearScreen() {
-      code = "";
-      screen.textContent = "";
+      if (code.length > 0) {
+        code = code.slice(0, -1);
+        screen.textContent = formatDate(code);
+      }
     }
 
     function formatDate(code) {
@@ -203,42 +211,42 @@
 
     function submitCode() {
       if (code === "01112021") {
-        fadeOutMusicAndPage();
+        // Làm mờ, giảm nhạc dần
+        document.body.classList.add("fade-out");
+        let fade = setInterval(() => {
+          if (audio.volume > 0.05) audio.volume -= 0.05;
+          else {
+            clearInterval(fade);
+            audio.pause();
+          }
+        }, 100);
+        setTimeout(() => {
+          window.location.href = "locked.html";
+        }, 1500);
       } else {
         alert("Sai rồi, thử lại nhé 💕");
         clearScreen();
       }
     }
 
-    function fadeOutMusicAndPage() {
-      const fadeDuration = 2000;
-      const fadeStep = 100;
-      const fadeInterval = setInterval(() => {
-        if (music.volume > 0.05) {
-          music.volume -= 0.05;
-        } else {
-          clearInterval(fadeInterval);
-          music.pause();
-        }
-      }, fadeStep);
+    // 💖 Tim bay đa hướng mượt
+    function createHearts() {
+      const heartCount = 25;
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = Math.random() * 100 + "vh";
+        heart.style.fontSize = 14 + Math.random() * 12 + "px";
+        heart.style.animationDuration = 3 + Math.random() * 3 + "s"; // nhanh hơn 20%
+        document.body.appendChild(heart);
 
-      document.body.classList.add("fade-out");
-      setTimeout(() => window.location.href = "locked.html", fadeDuration + 600);
-    }
-
-    // Tim tĩnh, nhẹ
-    function spawnHearts() {
-      const hearts = ["💖","💘","💝"];
-      for (let i = 0; i < 8; i++) {
-        const h = document.createElement("div");
-        h.classList.add("floating-heart");
-        h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        h.style.left = Math.random() * 90 + "vw";
-        h.style.top = Math.random() * 80 + "vh";
-        h.style.animationDelay = Math.random() * 4 + "s";
-        h.style.fontSize = 18 + Math.random() * 12 + "px";
-        document.body.appendChild(h);
+        heart.addEventListener("animationend", () => heart.remove());
       }
+
+      // liên tục tạo tim mới
+      setTimeout(createHearts, 2000);
     }
   </script>
 </body>
