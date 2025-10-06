@@ -1,96 +1,200 @@
-// Page3.jsx
-import React, { useState, useRef } from "react";
-import { Play, Pause } from "lucide-react";
-
-export default function Page3() {
-  const [activeTab, setActiveTab] = useState("love");
-  const [currentSong, setCurrentSong] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
-
-  const songs = [
-    { name: "Lover's Moon", src: "/music/lovers_moon.mp3" },
-    { name: "Soft Memory", src: "/music/soft_memory.mp3" },
-  ];
-
-  const handlePlay = (song) => {
-    if (currentSong?.src !== song.src) {
-      setCurrentSong(song);
-      if (audioRef.current) {
-        audioRef.current.src = song.src;
-        audioRef.current.play();
-        setIsPlaying(true);
-      }
-    } else {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        audioRef.current.play();
-        setIsPlaying(true);
-      }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anniversary - Page 3</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom, #ff9ca0, #ffc6d0);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-  };
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case "love":
-        return <div className="p-4 text-center text-white">💌 Nội dung Love Letter (bạn chỉnh sau)</div>;
-      case "music":
-        return (
-          <div className="p-4 text-white">
-            <h2 className="text-lg font-semibold mb-2">🎵 Chọn bài hát</h2>
-            {songs.map((song) => (
-              <div
-                key={song.name}
-                className={`p-2 rounded-lg cursor-pointer mb-2 ${
-                  currentSong?.src === song.src ? "bg-pink-500/40" : "hover:bg-pink-300/30"
-                }`}
-                onClick={() => handlePlay(song)}
-              >
-                {song.name}
-              </div>
-            ))}
-          </div>
-        );
-      case "gallery":
-        return <div className="p-4 text-center text-white">🖼️ Gallery (bạn chỉnh sau)</div>;
-      default:
-        return null;
+    /* --- Thanh menu --- */
+    header {
+      display: flex;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-  };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-red-200 via-pink-200 to-pink-100 relative">
-      {/* Navbar */}
-      <div className="flex justify-around bg-pink-400 text-white py-3 font-semibold shadow-md">
-        <button onClick={() => setActiveTab("love")} className={activeTab === "love" ? "underline" : ""}>
-          Love Letter
-        </button>
-        <button onClick={() => setActiveTab("music")} className={activeTab === "music" ? "underline" : ""}>
-          Music
-        </button>
-        <button onClick={() => setActiveTab("gallery")} className={activeTab === "gallery" ? "underline" : ""}>
-          Gallery
-        </button>
-      </div>
+    header button {
+      background: transparent;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      color: #b3003b;
+      margin: 0 20px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto">{renderContent()}</div>
+    header button.active {
+      color: #fff;
+      text-shadow: 0 0 5px #ff3366;
+    }
 
-      {/* Music Control Bar */}
-      {currentSong && (
-        <div className="fixed bottom-0 left-0 right-0 bg-pink-300 text-white flex items-center justify-between px-4 py-2 shadow-lg">
-          <button
-            onClick={() => handlePlay(currentSong)}
-            className="p-2 rounded-full bg-white/30 hover:bg-white/40"
-          >
-            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-          </button>
-          <span className="font-medium">{currentSong.name}</span>
-          <audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
-        </div>
-      )}
+    header button:hover {
+      color: #ff3366;
+    }
+
+    /* --- Nội dung từng phần --- */
+    section {
+      display: none;
+      flex: 1;
+      padding: 30px;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* --- Trình phát nhạc --- */
+    .music-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    }
+
+    .music-player button {
+      border: none;
+      background: #ff3366;
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+
+    .music-player span {
+      flex: 1;
+      text-align: center;
+      color: #b3003b;
+      font-weight: 600;
+    }
+
+    .music-list button {
+      display: block;
+      margin: 10px auto;
+      background: #fff;
+      border: 2px solid #ff3366;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .music-list button:hover {
+      background: #ff3366;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button id="btn-letter" class="active">Love Letter</button>
+    <button id="btn-music">Music</button>
+    <button id="btn-gallery">Gallery</button>
+  </header>
+
+  <section id="letter" class="active">
+    <h2>Love Letter 💌</h2>
+    <p>Viết lời nhắn của bạn ở đây...</p>
+  </section>
+
+  <section id="music">
+    <h2>Music 🎶</h2>
+    <div class="music-list">
+      <button onclick="playSong('music1.mp3', 'My Love Song')">My Love Song</button>
+      <button onclick="playSong('music2.mp3', 'Our Memory')">Our Memory</button>
+      <button onclick="playSong('music3.mp3', 'Forever Us')">Forever Us</button>
     </div>
-  );
-}
+  </section>
+
+  <section id="gallery">
+    <h2>Gallery 📸</h2>
+    <p>Thêm hình ảnh kỷ niệm của bạn ở đây...</p>
+  </section>
+
+  <div class="music-player">
+    <button id="togglePlay">⏸️</button>
+    <span id="currentSong">No song playing</span>
+    <audio id="audioPlayer"></audio>
+  </div>
+
+  <script>
+    const sections = {
+      letter: document.getElementById('letter'),
+      music: document.getElementById('music'),
+      gallery: document.getElementById('gallery')
+    };
+
+    const buttons = {
+      letter: document.getElementById('btn-letter'),
+      music: document.getElementById('btn-music'),
+      gallery: document.getElementById('btn-gallery')
+    };
+
+    // --- Chuyển tab ---
+    Object.keys(buttons).forEach(key => {
+      buttons[key].addEventListener('click', () => {
+        Object.keys(sections).forEach(k => {
+          sections[k].classList.remove('active');
+          buttons[k].classList.remove('active');
+        });
+        sections[key].classList.add('active');
+        buttons[key].classList.add('active');
+      });
+    });
+
+    // --- Trình phát nhạc ---
+    const audio = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('togglePlay');
+    const currentSong = document.getElementById('currentSong');
+    let isPlaying = false;
+
+    function playSong(src, name) {
+      audio.src = src;
+      audio.play();
+      isPlaying = true;
+      currentSong.textContent = name;
+      playBtn.textContent = '⏸️';
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        playBtn.textContent = '▶️';
+      } else {
+        audio.play();
+        playBtn.textContent = '⏸️';
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
