@@ -8,20 +8,22 @@
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #ffccd5, #ffd6e0, #ffe6f0);
+    background: url("images/bg-pink.jpg") no-repeat center center fixed;
+    background-size: cover;
     color: #4a0000;
     text-align: center;
   }
 
   /* Thanh menu */
   .navbar {
-    background: rgba(255, 160, 176, 0.4);
+    background: rgba(255, 200, 215, 0.7);
     display: flex;
     justify-content: center;
     gap: 40px;
     padding: 15px;
     font-weight: 600;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid #ffb3c1;
   }
 
   .navbar a {
@@ -41,11 +43,9 @@
     padding: 30px;
     animation: fadeIn 0.5s ease-in-out;
   }
-
   section.active {
     display: block;
   }
-
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -133,9 +133,11 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    background: #ffb3c1;
+    background: rgba(255, 204, 213, 0.9);
     padding: 10px;
     box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid #ffb3c1;
   }
 
   /* GALLERY */
@@ -174,6 +176,7 @@
         </div>
         🎶
       </div>
+
       <div class="song" onclick="playSong('images/Only You.mp3', 'Only You', 'Unknown Artist')">
         <div class="song-info">
           <div class="song-title">Only You</div>
@@ -181,6 +184,7 @@
         </div>
         🎶
       </div>
+
       <div class="song" onclick="playSong('images/Nhớ Mãi Chuyến Đi Này (feat. Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi & Cầm).mp3', 'Nhớ Mãi Chuyến Đi Này', 'Bùi Công Nam, Wren Evans...')">
         <div class="song-info">
           <div class="song-title">Nhớ Mãi Chuyến Đi Này</div>
@@ -215,6 +219,12 @@
       player.play();
       document.title = `${title} – ${artist}`;
     }
+
+    // 🔊 Khi vào trang tự động phát bài “Nhớ Mãi Chuyến Đi Này”
+    window.addEventListener("load", () => {
+      const songPath = "images/Nhớ Mãi Chuyến Đi Này (feat. Bùi Công Nam, Wren Evans, Tiến Luật, Diệu Nhi & Cầm).mp3";
+      playSong(songPath, "Nhớ Mãi Chuyến Đi Này", "Bùi Công Nam, Wren Evans...");
+    });
   </script>
 
 </body>
