@@ -1,1 +1,96 @@
+// Page3.jsx
+import React, { useState, useRef } from "react";
+import { Play, Pause } from "lucide-react";
 
+export default function Page3() {
+  const [activeTab, setActiveTab] = useState("love");
+  const [currentSong, setCurrentSong] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const songs = [
+    { name: "Lover's Moon", src: "/music/lovers_moon.mp3" },
+    { name: "Soft Memory", src: "/music/soft_memory.mp3" },
+  ];
+
+  const handlePlay = (song) => {
+    if (currentSong?.src !== song.src) {
+      setCurrentSong(song);
+      if (audioRef.current) {
+        audioRef.current.src = song.src;
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    } else {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "love":
+        return <div className="p-4 text-center text-white">💌 Nội dung Love Letter (bạn chỉnh sau)</div>;
+      case "music":
+        return (
+          <div className="p-4 text-white">
+            <h2 className="text-lg font-semibold mb-2">🎵 Chọn bài hát</h2>
+            {songs.map((song) => (
+              <div
+                key={song.name}
+                className={`p-2 rounded-lg cursor-pointer mb-2 ${
+                  currentSong?.src === song.src ? "bg-pink-500/40" : "hover:bg-pink-300/30"
+                }`}
+                onClick={() => handlePlay(song)}
+              >
+                {song.name}
+              </div>
+            ))}
+          </div>
+        );
+      case "gallery":
+        return <div className="p-4 text-center text-white">🖼️ Gallery (bạn chỉnh sau)</div>;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-red-200 via-pink-200 to-pink-100 relative">
+      {/* Navbar */}
+      <div className="flex justify-around bg-pink-400 text-white py-3 font-semibold shadow-md">
+        <button onClick={() => setActiveTab("love")} className={activeTab === "love" ? "underline" : ""}>
+          Love Letter
+        </button>
+        <button onClick={() => setActiveTab("music")} className={activeTab === "music" ? "underline" : ""}>
+          Music
+        </button>
+        <button onClick={() => setActiveTab("gallery")} className={activeTab === "gallery" ? "underline" : ""}>
+          Gallery
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 overflow-y-auto">{renderContent()}</div>
+
+      {/* Music Control Bar */}
+      {currentSong && (
+        <div className="fixed bottom-0 left-0 right-0 bg-pink-300 text-white flex items-center justify-between px-4 py-2 shadow-lg">
+          <button
+            onClick={() => handlePlay(currentSong)}
+            className="p-2 rounded-full bg-white/30 hover:bg-white/40"
+          >
+            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+          </button>
+          <span className="font-medium">{currentSong.name}</span>
+          <audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
+        </div>
+      )}
+    </div>
+  );
+}
