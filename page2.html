@@ -1,87 +1,154 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Anniversary - Page 2</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
-    :root{ --pink1:#ffb6c1; --pink2:#ff1744; --pink3:#b30047; }
-    *{box-sizing:border-box}
-    body{
-      margin:0; height:100vh; display:flex; flex-direction:column;
-      justify-content:space-between; align-items:center;
-      background: linear-gradient(135deg, var(--pink1), var(--pink2), var(--pink3));
-      background-size:400% 400%; animation:gradientMove 10s ease infinite;
-      font-family:'Poppins',sans-serif; color:white; overflow:hidden;
-      opacity:0; transition:opacity 0.6s ease;
-    }
-    body.fade-in{opacity:1}
-    body.fade-out{opacity:0}
-
-    @keyframes gradientMove{
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ff1744, #b30047);
+      background-size: 400% 400%;
+      animation: gradientMove 10s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
-    h1{
-      margin-top:30px; font-family:'Great Vibes',cursive;
-      font-size:3.5rem;
-      background:linear-gradient(90deg,#fff4f8,#ffe1eb,#ffffff);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      text-shadow:
-        0 0 8px rgba(255,180,200,0.8),
-        0 0 15px rgba(255,105,135,0.6),
-        0 0 25px rgba(255,192,203,0.5);
-      letter-spacing:2px;
+    body.fade-in { opacity: 1; }
+    body.fade-out { opacity: 0; }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    .container{flex:1; width:100%; display:flex; align-items:center; justify-content:space-evenly}
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      font-family: 'Great Vibes', cursive;
+      color: #fff5f7;
+      font-size: 3rem;
+      text-shadow: 0 0 15px rgba(255,255,255,0.9), 2px 2px 20px rgba(255, 182, 193, 0.8);
+    }
 
-    .photo-frame{
-      width:300px; height:400px; background:#fff; border-radius:15px;
-      box-shadow:0 0 20px rgba(255,105,180,0.45); overflow:hidden;
-      display:flex; align-items:center; justify-content:center;
+    .container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
     }
-    .photo-frame img{width:100%; height:100%; object-fit:cover; display:block}
 
-    .keypad{
-      display:grid; grid-template-columns:repeat(3,70px); gap:15px;
-      justify-content:center; align-items:center;
+    .photo-frame {
+      width: 300px;
+      height: 400px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .screen{
-      grid-column:span 3; height:50px; background:#fff0f5; border-radius:25px;
-      text-align:center; line-height:50px; font-size:1.3rem; color:#ff0066;
-      font-weight:700; letter-spacing:2px; overflow:hidden;
-      width:100%;
-    }
-    .btn{
-      width:70px; height:70px; background:#ff7aa8; border-radius:50%;
-      border:none; color:white; font-size:1.4rem; font-weight:700; cursor:pointer;
-      transition:transform .12s ease, background .12s ease; box-shadow:0 4px 10px rgba(0,0,0,.18);
-    }
-    .btn:hover{transform:scale(1.05); background:#ff99bb}
-    footer{margin-bottom:20px; font-style:italic; opacity:.92}
 
-    .heart{position:absolute; color:rgba(255,255,255,.5); font-size:15px; animation:fall linear infinite; top:-10px}
-    @keyframes fall{0%{transform:translateY(0) rotate(0); opacity:1} 100%{transform:translateY(100vh) rotate(360deg); opacity:0}}
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 70px);
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      grid-column: span 3;
+      height: 50px;
+      background: #fff0f5;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.3rem;
+      color: #ff0066;
+      font-weight: bold;
+      letter-spacing: 2px;
+      overflow: hidden;
+    }
+
+    .btn {
+      width: 70px;
+      height: 70px;
+      background: #ff7aa8;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background: #ff99bb;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    /* Hiệu ứng trái tim rơi */
+    .heart {
+      position: absolute;
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+      animation: fall linear infinite;
+      top: -10px;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>Happy Anniversary 💖</h1>
 
   <div class="container">
+    <!-- Ảnh cùng thư mục với page2.html -->
     <div class="photo-frame">
-      <!-- ảnh nằm cùng cấp với page2.html -->
-     <img id="hero" src="./DSC02880 (1).jpg" alt="Ảnh kỷ niệm"
-     onerror="this.src='https://via.placeholder.com/300x400/fff0f5/ff7aa8?text=Ảnh+không+tìm+thấy'">
-
-
+      <img id="hero" src="./DSC02880%20(1).jpg" alt="Ảnh kỷ niệm"
+        onerror="this.src='https://via.placeholder.com/300x400/fff0f5/ff7aa8?text=Ảnh+không+tìm+thấy'">
     </div>
 
-    <div class="keypad" style="width:320px">
+    <!-- Bàn phím mật mã -->
+    <div class="keypad">
       <div class="screen" id="screen"></div>
       <button class="btn" onclick="press('1')">1</button>
       <button class="btn" onclick="press('2')">2</button>
@@ -100,121 +167,82 @@
 
   <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
 
-  <!-- audio (file mp3 nằm trong images/) -->
-  <audio id="bgMusic" preload="auto" loop>
-    <source src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bg-music" src="images/Chẳng phải phép màu vậy sao chúng ta gặp nhau- - Phép Màu (Đàn Cá Gỗ OST) - MAYDAYs, Minh Tốc.mp3" preload="auto"></audio>
 
   <script>
-    // ---- biến & hằng ----
     let code = "";
-    const screen = document.getElementById('screen');
-    const music = document.getElementById('bgMusic');
-    const fadeDuration = 3000; // ms
+    const screen = document.getElementById("screen");
+    const music = document.getElementById("bg-music");
 
-    // Khi DOM sẵn sàng
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.add('fade-in');
-      screen.textContent = '';
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      screen.textContent = "";
       createHearts();
+
+      // Bắt đầu phát nhạc khi người dùng tương tác đầu tiên
+      const playMusicOnce = () => {
+        music.volume = 0.7;
+        music.play().catch(() => console.log("Autoplay bị chặn, cần click!"));
+        document.removeEventListener("click", playMusicOnce);
+      };
+      document.addEventListener("click", playMusicOnce);
     });
 
-    // đảm bảo audio bắt đầu khi có tương tác người dùng (click/tap/pointer)
-    function startMusicIfNeeded(){
-      if (music && music.paused) {
-        music.volume = 1;
-        music.play().catch(err => {
-          // nếu trình duyệt chặn, sẽ bắt đầu khi user tương tác (submit/press)
-          console.log('Không thể autoplay ngay:', err);
-        });
-      }
-    }
-    // dùng một lần khi người dùng tương tác lần đầu tiên trên body
-    const startHandler = () => { startMusicIfNeeded(); document.body.removeEventListener('pointerdown', startHandler); };
-    document.body.addEventListener('pointerdown', startHandler, {passive:true});
-
-    // Hàm nhập mật mã
-    function press(num){
+    function press(num) {
       if (code.length < 8) {
         code += num;
         screen.textContent = formatDate(code);
       }
     }
-    function clearScreen(){
-      code = '';
-      screen.textContent = '';
-    }
-    function formatDate(s){
-      if (s.length <= 2) return s;
-      if (s.length <= 4) return s.slice(0,2) + '/' + s.slice(2);
-      if (s.length <= 8) return s.slice(0,2) + '/' + s.slice(2,4) + '/' + s.slice(4);
-      return s;
+
+    function clearScreen() {
+      code = "";
+      screen.textContent = "";
     }
 
-    // Fade out mượt bằng requestAnimationFrame -> pause -> redirect
-    function fadeOutAndRedirect(callbackUrl){
-      if (!music || music.paused) {
-        // nếu nhạc chưa chạy thì redirect ngay
-        window.location.href = callbackUrl;
-        return;
-      }
-
-      const startVol = (typeof music.volume === 'number') ? music.volume : 1;
-      const startTime = performance.now();
-
-      function step(now){
-        const elapsed = now - startTime;
-        const t = Math.min(1, elapsed / fadeDuration);
-        const newVol = startVol * (1 - t);
-        music.volume = Math.max(0, newVol);
-
-        if (t < 1){
-          requestAnimationFrame(step);
-        } else {
-          try { music.pause(); } catch(e){ console.warn(e); }
-          // đảm bảo redirect ngay sau khi dừng
-          window.location.href = callbackUrl;
-        }
-      }
-      requestAnimationFrame(step);
-
-      // fallback: nếu vì lý do nào đó redirect không xảy ra, ép redirect sau fadeDuration + 1000ms
-      setTimeout(() => {
-        if (location.pathname.indexOf(callbackUrl) === -1) {
-          window.location.href = callbackUrl;
-        }
-      }, fadeDuration + 1000);
+    function formatDate(code) {
+      if (code.length <= 2) return code;
+      if (code.length <= 4) return code.slice(0, 2) + "/" + code.slice(2);
+      if (code.length <= 8) return code.slice(0, 2) + "/" + code.slice(2, 4) + "/" + code.slice(4);
+      return code;
     }
 
-    // Xử lý submit
-    function submitCode(){
-      // đảm bảo music đã được bật ít nhất 1 lần (nếu người dùng bấm submit thì coi là interaction)
-      startMusicIfNeeded();
+    function submitCode() {
+      if (code === "01112021") {
+        // Nhạc mờ dần và fade-out trang
+        const fadeDuration = 2000;
+        const fadeStep = 100;
+        const fadeInterval = setInterval(() => {
+          if (music.volume > 0.05) {
+            music.volume -= 0.05;
+          } else {
+            clearInterval(fadeInterval);
+            music.pause();
+          }
+        }, fadeStep);
 
-      if (code === '01112021') {
-        // fade và chuyển sang locked.html
-        fadeOutAndRedirect('locked.html');
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = "locked.html";
+        }, fadeDuration + 800);
       } else {
-        alert('Sai rồi, thử lại nhé 💕');
+        alert("Sai rồi, thử lại nhé 💕");
         clearScreen();
       }
     }
 
-    // Hiệu ứng trái tim rơi
-    function createHearts(){
-      const heartCount = 16;
-      for (let i = 0; i < heartCount; i++){
-        const h = document.createElement('div');
-        h.className = 'heart';
-        h.innerText = '💖';
-        h.style.left = (Math.random()*100) + 'vw';
-        h.style.fontSize = (12 + Math.random()*18) + 'px';
-        h.style.animationDuration = (4 + Math.random()*3) + 's';
-        document.body.appendChild(h);
-        h.addEventListener('animationend', () => h.remove());
+    function createHearts() {
+      const heartCount = 20;
+      for (let i = 0; i < heartCount; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+        heart.style.fontSize = 12 + Math.random() * 10 + "px";
+        document.body.appendChild(heart);
+        heart.addEventListener("animationend", () => heart.remove());
       }
-      // tiếp tục tạo theo chu kỳ nhỏ
-      setTimeout(createHearts, 900);
     }
   </script>
 </body>
