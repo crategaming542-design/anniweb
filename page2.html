@@ -16,6 +16,9 @@
       background: linear-gradient(135deg, #ffb6c1, #ff69b4);
       font-family: 'Poppins', sans-serif;
       color: white;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards; /* ✨ Hiệu ứng vào */
+      transition: opacity 0.8s ease; /* ✨ Chuẩn bị cho fade out */
     }
 
     h1 {
@@ -61,4 +64,110 @@
     }
 
     .screen {
-      gri
+      grid-column: span 3;
+      height: 50px;
+      background: #fff0f5;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.3rem;
+      color: #ff0066;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .btn {
+      width: 70px;
+      height: 70px;
+      background: #ff7aa8;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background: #ff99bb;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+
+    /* 🌈 Hiệu ứng fade in / fade out */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(1.02); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.98); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Anniversary 💖</h1>
+  <div class="container">
+    <!-- Khung ảnh bên trái -->
+    <div class="photo-frame">
+      <img src="your-photo.jpg" alt="Our photo">
+    </div>
+
+    <!-- Bàn phím mật mã bên phải -->
+    <div class="keypad">
+      <div class="screen" id="screen">*</div>
+      <button class="btn" onclick="press('1')">1</button>
+      <button class="btn" onclick="press('2')">2</button>
+      <button class="btn" onclick="press('3')">3</button>
+      <button class="btn" onclick="press('4')">4</button>
+      <button class="btn" onclick="press('5')">5</button>
+      <button class="btn" onclick="press('6')">6</button>
+      <button class="btn" onclick="press('7')">7</button>
+      <button class="btn" onclick="press('8')">8</button>
+      <button class="btn" onclick="press('9')">9</button>
+      <button class="btn" onclick="press('0')">0</button>
+      <button class="btn" onclick="clearScreen()">⌫</button>
+      <button class="btn" onclick="submitCode()">✔</button>
+    </div>
+  </div>
+
+  <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
+
+  <script>
+    let code = "";
+    function press(num) {
+      if (code.length < 7) {
+        code += num;
+        document.getElementById("screen").textContent = "*".repeat(code.length);
+      }
+    }
+
+    function clearScreen() {
+      code = "";
+      document.getElementById("screen").textContent = "*";
+    }
+
+    // 🎬 Khi nhập đúng mật khẩu, fade out trước khi chuyển trang
+    function submitCode() {
+      if (code === "1112021") {
+        document.body.style.animation = "fadeOut 0.8s forwards";
+        setTimeout(() => {
+          window.location.href = "page3.html";
+        }, 800);
+      } else {
+        alert("Sai rồi, thử lại nhé 💕");
+        clearScreen();
+      }
+    }
+  </script>
+</body>
+</html>
