@@ -3,50 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chưa mở khóa đâu nha pé iuu 💕</title>
+  <title>Locked Page 💝</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(to bottom, #ffb6c1, #ffdee9);
+      background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Poppins', sans-serif;
+      color: #b30059;
+      text-align: center;
       overflow: hidden;
     }
 
     h1 {
-      color: #d63384;
       font-size: 2rem;
-      text-align: center;
       margin-bottom: 20px;
-      animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
+      animation: pulse 2s infinite;
     }
 
     #countdown {
       font-size: 1.5rem;
-      color: #8b005d;
-      background: rgba(255, 255, 255, 0.6);
-      padding: 15px 30px;
+      background: rgba(255,255,255,0.4);
+      padding: 10px 20px;
       border-radius: 20px;
-      backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 
-    /* Hiệu ứng tim rơi */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
     .heart {
-      position: fixed;
+      position: absolute;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 20px;
       top: -10px;
-      color: #ff6fa8;
-      font-size: 18px;
-      animation: fall linear forwards;
+      animation: fall linear infinite;
     }
 
     @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💞 Nội dung chưa được mở khóa... chờ nha pé iuuu 💞</h1>
+  <div id="countdown"></div>
+
+  <script>
+    // Countdown đến ngày 1/11/2025
+    const targetDate = new Date("2025-11-01T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerText = "Đã đến lúc mở khóa rồi 💖";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerText =
+        `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây 💕`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Hiệu ứng tim rơi
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = 12 + Math.random() * 20 + "px";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+
+      heart.addEventListener("animationend", () => heart.remove());
+    }
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
