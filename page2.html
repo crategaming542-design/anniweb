@@ -1,103 +1,172 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slide Presentation</title>
-<style>
-  body {
-    margin: 0;
-    background-color: black;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anniversary - Page 2</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
-  .slide {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
 
-  .active {
-    opacity: 1;
-  }
+    body.fade-in {
+      opacity: 1;
+    }
 
-  #passwordPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+    body.fade-out {
+      opacity: 0;
+    }
 
-  input {
-    margin-top: 20px;
-    padding: 8px;
-    font-size: 18px;
-    border: none;
-    border-radius: 4px;
-  }
-</style>
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      font-family: 'Great Vibes', cursive;
+      color: #ff3366;
+      font-size: 3rem;
+      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+
+    .photo-frame {
+      width: 300px;
+      height: 400px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 70px);
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .screen {
+      grid-column: span 3;
+      height: 50px;
+      background: #fff0f5;
+      border-radius: 25px;
+      text-align: center;
+      line-height: 50px;
+      font-size: 1.3rem;
+      color: #ff0066;
+      font-weight: bold;
+      letter-spacing: 3px;
+      overflow: hidden;
+    }
+
+    .btn {
+      width: 70px;
+      height: 70px;
+      background: #ff7aa8;
+      border-radius: 50%;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background: #ff99bb;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Happy Anniversary 💖</h1>
 
-  <!-- Trang nhập mật khẩu -->
-  <div class="slide active" id="passwordPage">
-    <div>
-      <h2>Nhập mật khẩu để tiếp tục</h2>
-      <input type="text" id="passwordInput" placeholder="Nhập mật khẩu...">
-      <p id="msg"></p>
+  <div class="container">
+    <!-- Khung ảnh bên trái -->
+    <div class="photo-frame">
+      <img src="your-photo.jpg" alt="Our photo">
+    </div>
+
+    <!-- Bàn phím mật mã bên phải -->
+    <div class="keypad">
+      <div class="screen" id="screen"></div>
+      <button class="btn" onclick="press('1')">1</button>
+      <button class="btn" onclick="press('2')">2</button>
+      <button class="btn" onclick="press('3')">3</button>
+      <button class="btn" onclick="press('4')">4</button>
+      <button class="btn" onclick="press('5')">5</button>
+      <button class="btn" onclick="press('6')">6</button>
+      <button class="btn" onclick="press('7')">7</button>
+      <button class="btn" onclick="press('8')">8</button>
+      <button class="btn" onclick="press('9')">9</button>
+      <button class="btn" onclick="press('0')">0</button>
+      <button class="btn" onclick="clearScreen()">⌫</button>
+      <button class="btn" onclick="submitCode()">✔</button>
     </div>
   </div>
 
-  <!-- Trang 2 -->
-  <div class="slide" id="page2">
-    <h1>Trang 2 - Nội dung bắt đầu!</h1>
-  </div>
+  <footer>*Mật khẩu là ngày đầu tiên mình yêu nhau*</footer>
 
-<script>
-  const correctPassword = "011121"; // mật khẩu mới
-  const input = document.getElementById("passwordInput");
-  const msg = document.getElementById("msg");
-  const page1 = document.getElementById("passwordPage");
-  const page2 = document.getElementById("page2");
+  <script>
+    let code = "";
+    const screen = document.getElementById("screen");
 
-  // Bỏ hiển thị * (hiển thị bình thường)
-  input.setAttribute("type", "text");
+    document.addEventListener("DOMContentLoaded", () => {
+      document.body.classList.add("fade-in");
+      screen.textContent = ""; // đảm bảo trống khi load
+    });
 
-  input.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") {
-      if (input.value === correctPassword) {
-        msg.textContent = "Đúng mật khẩu!";
-        fadeOut(page1);
-        setTimeout(() => {
-          fadeIn(page2);
-        }, 1200);
-      } else {
-        msg.textContent = "Sai mật khẩu!";
+    function press(num) {
+      if (code.length < 8) {
+        code += num;
+        screen.textContent = code; // hiện số thật
       }
     }
-  });
 
-  function fadeOut(element) {
-    element.style.opacity = 0;
-    setTimeout(() => {
-      element.style.display = "none";
-    }, 1000);
-  }
+    function clearScreen() {
+      code = "";
+      screen.textContent = "";
+    }
 
-  function fadeIn(element) {
-    element.style.display = "flex";
-    setTimeout(() => {
-      element.style.opacity = 1;
-    }, 100);
-  }
-</script>
-
-</body>
-</html>
+    function submitCode() {
+      // 🔒 đổi mật khẩu ở đây
+      if (code === "011121") {
+        document.body.classList.add("fade-out");
+        setTimeout(() => {
+          window.location.href = "page3.html";
+        }, 1000);
