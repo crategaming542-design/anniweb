@@ -7,18 +7,18 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
-    /* Hiệu ứng fade-in/out */
     body {
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
       margin: 0;
       height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      align-items: center;
       background: linear-gradient(135deg, #ffb6c1, #ff69b4);
       font-family: 'Poppins', sans-serif;
       color: white;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
 
     body.fade-in {
@@ -43,6 +43,7 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
+      width: 100%;
     }
 
     .photo-frame {
@@ -114,6 +115,7 @@
 </head>
 <body>
   <h1>Happy Anniversary 💖</h1>
+
   <div class="container">
     <!-- Khung ảnh bên trái -->
     <div class="photo-frame">
@@ -142,28 +144,27 @@
 
   <script>
     let code = "";
+    const screen = document.getElementById("screen");
 
-    // Fade in khi vào trang
     document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.add("fade-in");
+      screen.textContent = ""; // đảm bảo trống khi load
     });
 
-    // Khi nhấn số
     function press(num) {
       if (code.length < 8) {
         code += num;
-        document.getElementById("screen").textContent = code;
+        screen.textContent = code; // hiện số thật
       }
     }
 
     function clearScreen() {
       code = "";
-      document.getElementById("screen").textContent = "";
+      screen.textContent = "";
     }
 
     function submitCode() {
-      if (code === "01112021") {
-        // Fade-out trước khi chuyển trang
+      if (code === "1112021" || code === "01112021") {
         document.body.classList.add("fade-out");
         setTimeout(() => {
           window.location.href = "page3.html";
