@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chưa mở khóa đâu nha pé iuu 💕</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(to bottom, #ffb6c1, #ffdee9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      color: #8b005d;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 15px 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Hiệu ứng tim rơi */
+    .heart {
+      position: fixed;
+      top: -10px;
+      color: #ff6fa8;
+      font-size: 18px;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity
